@@ -4,9 +4,13 @@ const cors = require('cors');
 
 const routes = require('./src/routes/personagens.route');
 
+const conectDatabase = require('./src/database/database');
+
 const app = express();
 
 const port = 3000;
+
+conectDatabase();
 
 app.use(express.json());
 

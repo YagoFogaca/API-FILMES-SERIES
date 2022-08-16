@@ -1,5 +1,12 @@
 # Como criar uma API usando node.js, express mongoDB
 
+## Conceitos:
+
+- POST = Criar
+- GET = Pegar
+- PUT/PATCH = Atuzalizar os dados / atualizar um campo do dado
+- DELETE = Excluir
+
 ## 1º Passo configurar ambiente:
 
 ### Configuração ao meu gosto, você pode altera-las quando quiser.

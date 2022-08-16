@@ -1,54 +1,30 @@
 [
   {
-    "id": "62f56bc00f079c87540356e6",
-    "tipo": "Atrativos Turísticos",
-    "nome": "Museu Mariano Procopio",
-    "endereco": [
-      {
-        "rua": "R. Mariano Procópio",
-        "bairro": "Mariano Procopio"
-      }
-    ],
-    "img": [
-      {
-        "img_1": "url",
-        "img_2": "url",
-        "img_3": "url",
-        "img_4": "url"
-      }
-    ],
-    "descricao": [
-      {
-        "descricao_texto": "O Museu Mariano Procópio, localizado em Juiz de Fora, é o primeiro museu surgido em Minas Gerais. Fundado em 1915 por Alfredo Ferreira Lage, abriga um dos principais acervos do país, com aproximadamente 50 mil peças.",
-        "horario_de_funcionamento": "Segunda a sexta de 8h0 as 16h0",
-        "maps": "https://www.google.com/maps/dir/-21.7148149,-43.3541466/Museu+mariano+procopio/@-21.73057,-43.3753121,14z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x989c917a68ac2b:0x6002ab99115a4764!2m2!1d-43.3599554!2d-21.7458374"
-      }
-    ]
+    "id": "1",
+    "tipo": "serie",
+    "nome": "suits",
+    "nome_personagem": "Mike Ross",
+    "nome_ator": "Patrick J. Adams"
   },
   {
-    "id": "62f570d90f4989da960fd6fd",
-    "tipo": "Atrativos Turísticos",
-    "nome": "Mirante do Morro do Cristo",
-    "endereco": [
-      {
-        "rua": "Estr. Eng. Gentil Forn ",
-        "bairro": "São Pedro, Juiz de Fora - MG"
-      }
-    ],
-    "img": [
-      {
-        "img_1": "url_1",
-        "img_2": "url_2",
-        "img_3": "url_3",
-        "img_4": "url_4"
-      }
-    ],
-    "descricao": [
-      {
-        "descricao_texto": "Espaço no topo da colina com um monumento ao Cristo Redentor e uma praça com vista de Juiz de Fora.",
-        "horario_de_funcionamento": "Segunda a sexta de 7h0 as 22h0",
-        "maps": "https://www.google.com/maps/place/Mirante+do+Morro+do+Cristo/@-21.7637986,-43.357338,15z/data=!4m5!3m4!1s0x0:0x272f297a5fce0ac7!8m2!3d-21.7637986!4d-43.357338"
-      }
-    ]
+    "id": "2",
+    "tipo": "serie",
+    "nome": "suits",
+    "nome_personagem": "Harvey Specter",
+    "nome_ator": "Grabriel Match"
+  },
+  {
+    "id": "3",
+    "tipo": "filme",
+    "nome": "arremessando alto",
+    "nome_personagem": "Stanley Sugerman",
+    "nome_ator": "Adam Sandler"
+  },
+  {
+    "id": "4",
+    "tipo": "filme",
+    "nome": "arremessando alto",
+    "nome_personagem": "Bo Cruz",
+    "nome_ator": "Juancho Hermangómez"
   }
 ]
