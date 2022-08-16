@@ -1,0 +1,19 @@
+{
+  "name": "jf-turismo-api",
+  "version": "1.0.0",
+  "description": "-   Criar uma pasta .vscode na raiz do projeto e dentro dela uma arquivo chamado settings.json.\r -   Dentro do arquivo settings.json o seguinte código:",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "author": "Yago Fogaça",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
