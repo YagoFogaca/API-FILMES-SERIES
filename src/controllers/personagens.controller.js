@@ -5,9 +5,7 @@ const getAllController = (req, res) => {
   res.send(dados);
 };
 
-const getByIdController = (req, res) => {
-  res.send('<h1>kvgjkfdkv</h1>');
-};
+const getByIdController = (req, res) => {};
 
 module.exports = {
   getAllController,
