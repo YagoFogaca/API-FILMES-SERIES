@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 
 const cors = require('cors');
@@ -8,7 +10,7 @@ const conectDatabase = require('./src/database/database');
 
 const app = express();
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 conectDatabase();
 
@@ -19,7 +21,5 @@ app.use(cors());
 app.use('/personagens', routes);
 
 app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
+  console.log(`Servidor rodando na porta : ${port}`);
 });
-
-// Terminar antes do almoço

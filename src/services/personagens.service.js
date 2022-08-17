@@ -1,45 +1,55 @@
 const Personagem = require('../models/personagemSchema');
 
 const getAllService = async () => {
-  const allPersonagens = await Personagem.find();
+  let allPersonagens = await Personagem.find({}, { _id: 0, __v: 0 });
+
+  if (allPersonagens.length === 0) {
+    allPersonagens = null;
+  }
 
   return allPersonagens;
 };
 
 const getByIdService = async (id) => {
-  const chosenPersonagem = await Personagem.findOne({ id: id });
+  const chosenPersonagem = await Personagem.findOne(
+    { id: id },
+    { _id: 0, __v: 0 },
+  );
 
   return chosenPersonagem;
 };
 
 const getByTypeService = async (tipo) => {
-  let personagens = await Personagem.find({ tipo: tipo });
+  let chosenPersonagens = await Personagem.find(
+    { tipo: tipo },
+    { _id: 0, __v: 0 },
+  );
 
-  if (personagens.length === 0) {
-    personagens = null;
+  if (chosenPersonagens.length === 0) {
+    chosenPersonagens = null;
   }
 
-  return personagens;
+  return chosenPersonagens;
 };
 
 const postService = async (personagem) => {
-  const novoPersonagem = await Personagem.create(personagem);
+  const newPersonagem = await Personagem.create(personagem);
 
-  return novoPersonagem;
+  return newPersonagem;
 };
 
 const putService = async (id, body) => {
-  const personagem = await Personagem.findOneAndUpdate({ id: id }, body, {
+  const updatePersonagem = await Personagem.findOneAndUpdate({ id: id }, body, {
     new: true,
   });
 
-  return personagem;
+  return updatePersonagem;
 };
 
 const deleteService = async (id) => {
-  const personagemDeletado = Personagem.findOneAndDelete({ id: id });
+  const deletePersonagem = Personagem.findOneAndDelete({ id: id });
 
-  return personagemDeletado;
+  return deletePersonagem;
 };
 
 module.exports = {

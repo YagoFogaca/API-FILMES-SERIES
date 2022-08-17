@@ -1,17 +1,15 @@
 const service = require('../services/personagens.service');
 
-const entitie = require('../entities/personagem.entitie');
-
 const getAllController = async (req, res) => {
   const allPersonagens = await service.getAllService();
 
   if (!allPersonagens) {
-    res.status(500).send({ message: 'Personagens não encontrados' });
+    res.status(404).send({ message: 'Personagens não encontrados' });
 
     return;
   }
 
-  res.send(allPersonagens);
+  res.status(200).send(allPersonagens);
 };
 
 const getByIdController = async (req, res) => {
@@ -20,12 +18,12 @@ const getByIdController = async (req, res) => {
   const chosenPersonagem = await service.getByIdService(paramsId);
 
   if (!chosenPersonagem) {
-    res.status(400).send({ message: 'Personagem não encontrado' });
+    res.status(404).send({ message: 'Personagem não encontrado' });
 
     return;
   }
 
-  res.send(chosenPersonagem);
+  res.status(200).send(chosenPersonagem);
 };
 
 const getByTypeController = async (req, res) => {
@@ -43,13 +41,15 @@ const getByTypeController = async (req, res) => {
 };
 
 const postController = async (req, res) => {
-  try {
-    const allPersonagens = await service.getAllService();
+  let allPersonagens = await service.getAllService();
 
-    let personagem = req.body;
+  let personagem = req.body;
 
-    let idsPersonagens = [];
+  let idsPersonagens = [];
 
+  if (!allPersonagens) {
+    personagem.id = 1;
+  } else {
     allPersonagens.forEach((personagem) => {
       idsPersonagens.push(personagem.id);
     });
@@ -57,46 +57,29 @@ const postController = async (req, res) => {
     const id = 1 + Math.max(...idsPersonagens);
 
     personagem.id = id;
-
-    const Personagem = new entitie(personagem);
-
-    Personagem.validate();
-
-    const newPersonagem = await service.postService(
-      Personagem.printPersonagem(),
-    );
-
-    res.send(newPersonagem);
-  } catch (err) {
-    console.log(err.message);
-    res.status(400).send({ message: err.message });
   }
+
+  const newPersonagem = await service.postService(personagem);
+
+  res.status(200).send(newPersonagem);
 };
 
 const putController = async (req, res) => {
-  try {
-    const paramsId = req.params.id;
+  const paramsId = req.params.id;
 
-    const personagem = req.body;
+  const personagem = req.body;
 
-    personagem.id = paramsId;
+  personagem.id = paramsId;
 
-    const chosenPersonagem = await service.getByIdService(paramsId);
+  const chosenPersonagem = await service.getByIdService(paramsId);
 
-    const Personagem = new entitie(personagem);
-
-    Personagem.validateId(chosenPersonagem);
-
-    Personagem.validate();
-
-    const changedPersonagem = await service.putService(paramsId, personagem);
-
-    res.status(200).send(changedPersonagem);
-  } catch (err) {
-    console.log(err.message);
-
-    res.status(400).send({ message: err.message });
+  if (!chosenPersonagem) {
+    return res.status(400).send({ menssage: 'Personagem não encontrado' });
   }
+
+  const changedPersonagem = await service.putService(paramsId, personagem);
+
+  res.status(200).send(changedPersonagem);
 };
 
 const deleteController = async (req, res) => {

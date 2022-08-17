@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 function conectDatabase() {
   mongoose
-    .connect('mongodb://localhost:27017/filmes-seriesDB', {
+    .connect(process.env.URI_DATABASE, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
-    .then(() => console.log('Connected to database'))
+    .then(() => console.log('Connected to database MongoDB Atlas'))
     .catch((err) => {
       return console.log(`Error connecting to database. Error: ${err}`);
     });
