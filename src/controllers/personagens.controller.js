@@ -3,68 +3,70 @@ const service = require('../services/personagens.service');
 const entitie = require('../entities/personagem.entitie');
 
 const getAllController = async (req, res) => {
-  const personagens = await service.getAllService();
+  const allPersonagens = await service.getAllService();
 
-  if (!personagens) {
-    res.status(500).send({ message: 'Personagem não encontrado' });
+  if (!allPersonagens) {
+    res.status(500).send({ message: 'Personagens não encontrados' });
 
     return;
   }
 
-  res.send(personagens);
+  res.send(allPersonagens);
 };
 
 const getByIdController = async (req, res) => {
-  const parametroId = req.params.id;
+  const paramsId = req.params.id;
 
-  const personagem = await service.getByIdService(parametroId);
+  const chosenPersonagem = await service.getByIdService(paramsId);
 
-  if (!personagem) {
+  if (!chosenPersonagem) {
     res.status(400).send({ message: 'Personagem não encontrado' });
 
     return;
   }
 
-  res.send(personagem);
+  res.send(chosenPersonagem);
 };
 
-const getByTipoController = async (req, res) => {
-  const parametroTipo = req.params.tipo;
+const getByTypeController = async (req, res) => {
+  const paramsTipo = req.params.type;
 
-  const personagem = await service.getByTipoService(parametroTipo);
+  const chosenPersonagem = await service.getByTypeService(paramsTipo);
 
-  if (!personagem) {
+  if (!chosenPersonagem) {
     res.status(400).send({ message: 'Personagem não encontrado' });
 
     return;
   }
 
-  res.status(200).send(personagem);
+  res.status(200).send(chosenPersonagem);
 };
 
 const postController = async (req, res) => {
   try {
-    const personagensId = await service.getAllService();
+    const allPersonagens = await service.getAllService();
 
-    let body = req.body;
+    let personagem = req.body;
 
-    let ids = [];
+    let idsPersonagens = [];
 
-    personagensId.forEach((personagem) => {
-      ids.push(personagem.id);
+    allPersonagens.forEach((personagem) => {
+      idsPersonagens.push(personagem.id);
     });
 
-    let id = 1 + Math.max(...ids);
+    const id = 1 + Math.max(...idsPersonagens);
 
-    body.id = id;
+    personagem.id = id;
 
-    const Personagem = new entitie(body);
+    const Personagem = new entitie(personagem);
 
     Personagem.validate();
 
-    const personagem = await service.postService(Personagem.printPersonagem());
+    const newPersonagem = await service.postService(
+      Personagem.printPersonagem(),
+    );
 
-    res.send(personagem);
+    res.send(newPersonagem);
   } catch (err) {
     console.log(err.message);
     res.status(400).send({ message: err.message });
@@ -73,23 +75,23 @@ const postController = async (req, res) => {
 
 const putController = async (req, res) => {
   try {
-    const parametroId = req.params.id;
+    const paramsId = req.params.id;
 
-    const body = req.body;
+    const personagem = req.body;
 
-    body.id = parametroId;
+    personagem.id = paramsId;
 
-    const validaId = await service.getByIdService(parametroId);
+    const chosenPersonagem = await service.getByIdService(paramsId);
 
-    const Personagem = new entitie(body);
+    const Personagem = new entitie(personagem);
 
-    Personagem.validateId(validaId);
+    Personagem.validateId(chosenPersonagem);
 
     Personagem.validate();
 
-    const personagem = await service.putService(parametroId, body);
+    const changedPersonagem = await service.putService(paramsId, personagem);
 
-    res.status(200).send(personagem);
+    res.status(200).send(changedPersonagem);
   } catch (err) {
     console.log(err.message);
 
@@ -98,22 +100,23 @@ const putController = async (req, res) => {
 };
 
 const deleteController = async (req, res) => {
-  const parametroId = req.params.id;
+  const paramsId = req.params.id;
 
-  const personagemDeletado = await service.deleteService(parametroId);
+  const deletePersonagem = await service.deleteService(paramsId);
 
-  if (!personagemDeletado) {
+  if (!deletePersonagem) {
     res.status(400).send({ message: 'Personagem não encontrado' });
 
     return;
   }
+
   res.status(200).send({ message: 'Personagem deletado com sucesso' });
 };
 
 module.exports = {
   getAllController,
   getByIdController,
-  getByTipoController,
+  getByTypeController,
   postController,
   putController,
   deleteController,

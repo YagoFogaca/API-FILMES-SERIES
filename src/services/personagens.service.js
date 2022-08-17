@@ -1,33 +1,25 @@
 const Personagem = require('../models/personagemSchema');
 
 const getAllService = async () => {
-  const personagens = await Personagem.find();
+  const allPersonagens = await Personagem.find();
 
-  return personagens;
+  return allPersonagens;
 };
 
 const getByIdService = async (id) => {
-  const personagem = await Personagem.findOne({ id: id });
+  const chosenPersonagem = await Personagem.findOne({ id: id });
 
-  return personagem;
+  return chosenPersonagem;
 };
 
-const getByTipoService = async (tipo) => {
-  let personagensArray = [];
+const getByTypeService = async (tipo) => {
+  let personagens = await Personagem.find({ tipo: tipo });
 
-  const personagens = await Personagem.find();
-
-  personagens.forEach((personagem) => {
-    if (personagem.tipo === tipo) {
-      personagensArray.push(personagem);
-    }
-  });
-
-  if (personagensArray.length === 0) {
-    personagensArray = null;
+  if (personagens.length === 0) {
+    personagens = null;
   }
 
-  return personagensArray;
+  return personagens;
 };
 
 const postService = async (personagem) => {
@@ -53,7 +45,7 @@ const deleteService = async (id) => {
 module.exports = {
   getAllService,
   getByIdService,
-  getByTipoService,
+  getByTypeService,
   postService,
   putService,
   deleteService,

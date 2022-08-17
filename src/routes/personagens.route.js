@@ -2,16 +2,16 @@ const router = require('express').Router();
 
 const controller = require('../controllers/personagens.controller');
 
-router.get('/', controller.getAllController);
+router.get('/all-personagens', controller.getAllController);
 
-router.get('/:id', controller.getByIdController);
+router.get('/personagem/:id', controller.getByIdController);
 
-router.get('/tipos/:tipo', controller.getByTipoController);
+router.get('/all-personagens/:type', controller.getByTypeController);
 
-router.post('/create', controller.postController);
+router.post('/create-personagem', controller.postController);
 
-router.put('/update/:id', controller.putController);
+router.put('/update-personagem/:id', controller.putController);
 
-router.delete('/delete/:id', controller.deleteController);
+router.delete('/delete-personagem/:id', controller.deleteController);
 
 module.exports = router;
